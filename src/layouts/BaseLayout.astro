@@ -9,7 +9,10 @@ interface Props {
 
 const { title, description } = Astro.props;
 
-const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : undefined;
+// Con build.format=file las rutas llegan como /soporte.html o /index.html:
+// se normalizan para que el canonical coincida con la URL publicada.
+const pathname = Astro.url.pathname.replace(/\/index\.html$/, '/').replace(/\.html$/, '/');
+const canonical = Astro.site ? new URL(pathname, Astro.site).href : undefined;
 const socialImage = Astro.site ? new URL('/og.png', Astro.site).href : undefined;
 ---
 
