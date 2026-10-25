@@ -1,0 +1,103 @@
+---
+// Hero — PRD §9.2. Composición editorial con la bola crystalizada (React Bits)
+// en el color crimson del tema. Sin objetos que simulen el producto.
+import SiteNav from '@/layouts/SiteNav.astro';
+import BallHero from '@/components/hero/BallHero';
+import { PRICING, SUPPORT_MONTHS, formatMXN, whatsappLink } from '@/config/commerce';
+
+const whatsapp = whatsappLink();
+
+const facts = [
+  { label: 'Soporte', value: `${SUPPORT_MONTHS} meses` },
+  { label: 'Desde', value: formatMXN(PRICING.customerEquipment) },
+  { label: 'Entrega', value: 'ZMG' },
+];
+---
+
+<SiteNav />
+
+<main id="contenido">
+  <section class="relative overflow-hidden pt-28 pb-12 sm:pt-36 sm:pb-16">
+    <div
+      aria-hidden="true"
+      class="bg-grid pointer-events-none absolute inset-0 opacity-40 [mask-image:radial-gradient(70%_55%_at_50%_0%,black,transparent)]"
+    >
+    </div>
+    <div
+      aria-hidden="true"
+      class="glow-crimson pointer-events-none absolute inset-x-0 -top-32 h-[28rem] opacity-70"
+      data-parallax="0.2"
+    ></div>
+
+    <div class="relative mx-auto w-full max-w-6xl px-5 sm:px-8">
+      <div class="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:gap-8">
+        <div class="min-w-0">
+          <h1 class="fade-up font-semibold" style="--d: 60ms; font-size: clamp(2.4rem, 6.4vw, 4.25rem); line-height: 0.98">
+            Tu televisión. Tu configuración.<br class="hidden sm:block" />
+            <span class="text-crimson">Tu forma de disfrutar.</span>
+          </h1>
+
+          <p class="fade-up mt-6 max-w-xl text-base text-ink-muted sm:text-lg" style="--d: 130ms">
+            Una TV Box configurada a tu medida, con aplicaciones para ver películas, series y televisión, y
+            {SUPPORT_MONTHS} meses de soporte que mantienen esa configuración funcionando.
+          </p>
+
+          <div class="fade-up mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center" style="--d: 200ms">
+            <a
+              href="/#precios"
+              class="inline-flex w-full items-center justify-center gap-2 rounded-none bg-crimson px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-crimson-deep sm:w-auto"
+            >
+              Ver opciones y precios
+              <span aria-hidden="true">→</span>
+            </a>
+            <a
+              href={whatsapp ?? '/#consulta'}
+              target={whatsapp ? '_blank' : undefined}
+              rel={whatsapp ? 'noopener noreferrer' : undefined}
+              class="inline-flex w-full items-center justify-center gap-2 rounded-none border border-line px-6 py-3 text-sm font-medium text-ink transition-colors hover:border-line-strong hover:bg-surface sm:w-auto"
+            >
+              Consultar por WhatsApp
+              {whatsapp && <span aria-hidden="true">↗</span>}
+            </a>
+          </div>
+        </div>
+
+        <!-- Bola crystalizada en crimson (React Bits) -->
+        <div class="min-w-0" data-parallax="0.1">
+          <div class="fade-up" style="--d: 170ms">
+            <BallHero client:idle />
+          </div>
+        </div>
+      </div>
+
+      <dl class="fade-up mt-10 grid grid-cols-3 gap-4 border-t border-line pt-5 sm:mt-12" style="--d: 260ms">
+        {
+          facts.map((fact) => (
+            <div class="min-w-0">
+              <dt class="label-tech">{fact.label}</dt>
+              <dd class="mt-1 truncate font-display text-base font-medium sm:text-lg">{fact.value}</dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+  </section>
+</main>
+
+<style>
+  .fade-up {
+    animation: fade-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: var(--d, 0ms);
+  }
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(14px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+</style>

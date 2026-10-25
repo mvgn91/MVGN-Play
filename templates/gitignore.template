@@ -1,0 +1,14 @@
+# ─── MVGN (tool completo — publicación segura por construcción) ──
+.mvgn/
+
+# ─── Project hygiene ──────────────────────────────────────
+node_modules/
+dist/
+.env*
+.env*.local
+.DS_Store
+*.tmp
+
+# NOTA: para trazabilidad pública del blackboard, negar conscientemente:
+#   !.mvgn/
+#   !.mvgn/blackboard/

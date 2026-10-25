@@ -1,0 +1,9 @@
+{
+  "extends": "./tsconfig.json",
+  "include": ["src/**/*.ts", "src/**/*.tsx", "scripts/**/*.ts"],
+  "exclude": ["dist", "node_modules", ".astro"],
+  "compilerOptions": {
+    "noEmit": true,
+    "allowImportingTsExtensions": true
+  }
+}

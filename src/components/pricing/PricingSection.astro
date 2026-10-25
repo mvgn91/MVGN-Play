@@ -1,0 +1,22 @@
+---
+// Sección "Modalidades y precios" (PRD §8.1 #6). Todos los importes vienen de
+// src/config/commerce.ts; aquí no se escribe un solo número de precio.
+import PriceSelector from '@/components/pricing/PriceSelector.tsx';
+---
+
+<section id="precios" class="scroll-mt-24 border-t border-line/60">
+  <div class="mx-auto w-full max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
+    <div class="max-w-2xl" data-reveal>
+      <p class="label-tech">Modalidades y precios</p>
+      <h2 class="mt-3 text-3xl font-semibold sm:text-4xl">Elige cómo quieres empezar.</h2>
+      <p class="mt-4 text-ink-muted">
+        Dos modalidades y una instalación presencial opcional. El total se calcula al instante, sin letras chiquitas
+        sobre lo que incluye cada una.
+      </p>
+    </div>
+
+    <div class="mt-10" data-reveal style="--reveal-delay: 0.08s">
+      <PriceSelector client:visible />
+    </div>
+  </div>
+</section>

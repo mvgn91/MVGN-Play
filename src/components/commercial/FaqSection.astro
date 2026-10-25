@@ -1,0 +1,74 @@
+---
+// Preguntas frecuentes (PRD §9.9). Acordeón nativo con <details>: funciona sin JS
+// y conserva el comportamiento de teclado del navegador.
+import { PRICING, SUPPORT_MONTHS, formatMXN } from '@/config/commerce';
+
+const faqs = [
+  {
+    q: '¿Qué incluye la ONN configurada?',
+    a: `El equipo ONN Google TV 4K, configuración inicial, personalización de la interfaz, instalación y ajuste de las aplicaciones incluidas para películas, series y televisión, pruebas funcionales y ${SUPPORT_MONTHS} meses de soporte técnico por ${formatMXN(PRICING.equipmentIncluded)}.`,
+  },
+  {
+    q: '¿Puedo contratar con mi propia TV Box?',
+    a: `Sí. La configuración de tu equipo cuesta ${formatMXN(PRICING.customerEquipment)} e incluye ${SUPPORT_MONTHS} meses de soporte. Está sujeta a que el equipo sea compatible y funcional; si requiere reparación física o una intervención extraordinaria, te lo informamos antes de continuar.`,
+  },
+  {
+    q: '¿Qué aplicaciones se instalan?',
+    a: 'Las aplicaciones incluidas para ver películas, series y televisión, más un lanzador personalizado (Projectivy) para ordenar la pantalla de inicio y SmartTube como alternativa para YouTube. Su alcance y funcionamiento pueden cambiar con el tiempo; cuando eso ocurre, el soporte instala una alternativa viable.',
+  },
+  {
+    q: '¿Tengo que pagar algo aparte?',
+    a: `No. El precio cubre equipo cuando aplica, configuración, personalización, las aplicaciones incluidas y ${SUPPORT_MONTHS} meses de soporte. Solo se cobra aparte lo que decidas agregar, como la instalación presencial en tu domicilio.`,
+  },
+  {
+    q: '¿Qué sucede si una aplicación deja de funcionar?',
+    a: 'Durante el periodo de soporte diagnosticamos la causa, ajustamos la configuración y, si la aplicación dejó de servir, instalamos una alternativa viable para mantener la cobertura de contenido. No garantizamos que la alternativa reproduzca todas las funciones ni que el contenido sea idéntico.',
+  },
+  {
+    q: `¿El soporte dura ${SUPPORT_MONTHS} meses?`,
+    a: `Sí: ${SUPPORT_MONTHS} meses desde la entrega o la configuración, que es el periodo en el que nos hacemos cargo de mantener funcionando la capa de aplicaciones. El detalle está en /soporte.`,
+  },
+  {
+    q: '¿Pueden instalar en mi domicilio?',
+    a: `Sí, como cargo adicional de ${formatMXN(PRICING.onsiteInstallation)} que se suma a cualquiera de las modalidades, sujeto a cobertura y agenda. Los domicilios fuera de la zona de cobertura pueden requerir cotización de traslado.`,
+  },
+  {
+    q: '¿Cuánto cuesta el envío?',
+    a: 'Dentro de la Zona Metropolitana de Guadalajara la entrega se coordina con la contratación. Los envíos fuera de la ZMG no están incluidos en el precio del equipo y se cotizan por separado.',
+  },
+  {
+    q: '¿Qué pasa si el equipo falla físicamente?',
+    a: 'El servicio no incluye reparaciones físicas ni reemplazo de hardware. Si el dispositivo presenta una falla de ese tipo, te lo informamos y se valora por separado; lo que sí cubre el soporte es la asistencia de configuración y diagnóstico.',
+  },
+  {
+    q: '¿Qué pasa cuando vence el soporte?',
+    a: 'El soporte no se renueva automáticamente ni genera cobros recurrentes. Al terminar los 12 meses puedes solicitar asistencia adicional, sujeta a disponibilidad y cotización.',
+  },
+];
+---
+
+<section id="faq" class="scroll-mt-24 border-t border-line/60">
+  <div class="mx-auto w-full max-w-4xl px-5 py-16 sm:px-8 sm:py-20">
+    <p class="label-tech">Preguntas frecuentes</p>
+    <h2 class="mt-3 text-3xl font-semibold sm:text-4xl" data-reveal>Lo que suelen preguntar antes de contratar.</h2>
+
+    <div class="mt-8 divide-y divide-line border-y border-line" data-reveal style="--reveal-delay: 0.08s">
+      {
+        faqs.map((item) => (
+          <details class="group py-4" data-faq>
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-display text-base font-medium text-ink marker:hidden">
+              {item.q}
+              <span
+                aria-hidden="true"
+                class="shrink-0 text-ink-muted transition-transform group-open:rotate-45"
+              >
+                +
+              </span>
+            </summary>
+            <p class="mt-3 max-w-2xl text-sm text-ink-muted">{item.a}</p>
+          </details>
+        ))
+      }
+    </div>
+  </div>
+</section>

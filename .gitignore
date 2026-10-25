@@ -1,0 +1,43 @@
+# ─── Generic hygiene ─────────────────────────────────────
+node_modules/
+dist/
+.astro/
+.env*
+!.env.example
+.env*.local
+.DS_Store
+.vercel
+nul
+*.tmp
+
+# ─── Agent tooling (local only) ──────────────────────────
+.mimocode/
+.kimchi/
+.atl/.skill-registry.cache.json
+.mvgn-context.json
+
+# ─── MVGN runtime (regenerable, never publish) ───────────
+.mvgn/
+.mvgn/audio/
+.mvgn/telemetry.db*
+events/
+event-history/
+reports/
+traceability/reports/
+analytics/reports/
+output/
+runtime-state/
+session/
+snapshots/
+telemetry/mvgn-telemetry*
+telemetry/*.db
+bin/
+
+# ─── Release artifacts ────────────────────────────────────
+release/
+
+# ─── MVGN legacy / credentials ───────────────────────────
+archive/
+SMG_CREDENTIAL.md
+*.exe
+*.exe~

@@ -1,0 +1,81 @@
+---
+import '../styles/global.css';
+import { SITE } from '@/config/site';
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+
+const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : undefined;
+const socialImage = Astro.site ? new URL('/og.png', Astro.site).href : undefined;
+---
+
+<!doctype html>
+<html lang="es-MX" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {canonical && <link rel="canonical" href={canonical} />}
+    <meta name="theme-color" content="#08090d" data-theme-color />
+    <meta name="robots" content="index, follow" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={SITE.name} />
+    <meta property="og:locale" content="es_MX" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    {canonical && <meta property="og:url" content={canonical} />}
+    {socialImage && <meta property="og:image" content={socialImage} />}
+
+    <!-- Twitter/X -->
+    <meta name="twitter:card" content={socialImage ? 'summary_large_image' : 'summary'} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    {socialImage && <meta name="twitter:image" content={socialImage} />}
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+    />
+
+    <!-- Tema guardado antes del primer pintado: sin destello ni salto de color -->
+    <script is:inline>
+      (() => {
+        let theme = 'dark';
+        try {
+          const stored = localStorage.getItem('mvgn-theme');
+          if (stored === 'light' || stored === 'dark') theme = stored;
+        } catch {
+          /* modo privado: se queda el tema oscuro de marca */
+        }
+        document.documentElement.dataset.theme = theme;
+
+        const meta = document.querySelector('meta[data-theme-color]');
+        if (meta) meta.setAttribute('content', theme === 'light' ? '#f5f5f2' : '#08090d');
+      })();
+    </script>
+  </head>
+  <body class="min-h-dvh bg-bg text-ink">
+    <a
+      href="#contenido"
+      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-none focus:bg-surface focus:px-4 focus:py-2 focus:text-sm focus:text-ink"
+    >
+      Saltar al contenido
+    </a>
+    <slot />
+
+    <!-- Parallax + revelado al hacer scroll (se desactiva con movimiento reducido) -->
+    <script>
+      import '../scripts/scroll-motion';
+    </script>
+  </body>
+</html>

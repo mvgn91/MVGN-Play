@@ -1,0 +1,145 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import { PRICING, SUPPORT_MONTHS, formatMXN, quote } from '@/config/commerce';
+import { SITE } from '@/config/site';
+
+const modalidades = [
+  {
+    name: 'Modalidad A — ONN 4K configurada',
+    price: PRICING.equipmentIncluded,
+    includes: [
+      'Dispositivo ONN 4K seleccionado para la oferta.',
+      'Configuración inicial y personalización de la interfaz.',
+      'Aplicaciones incluidas para ver películas, series y televisión, con sustitución por alternativas viables durante el periodo de soporte.',
+      'Projectivy Launcher como interfaz principal, sujeto a compatibilidad.',
+      'SmartTube como alternativa para YouTube, sujeto a compatibilidad y cambios externos.',
+      'Pruebas funcionales de la configuración entregada.',
+      `Soporte técnico durante ${SUPPORT_MONTHS} meses.`,
+    ],
+  },
+  {
+    name: 'Modalidad B — Configuración de tu equipo',
+    price: PRICING.customerEquipment,
+    includes: [
+      'Evaluación básica de compatibilidad.',
+      'Configuración de la TV Box aportada por el cliente.',
+      'Personalización de interfaz y ajustes.',
+      'Aplicaciones incluidas para ver películas, series y televisión, con sustitución por alternativas viables durante el periodo de soporte.',
+      'Pruebas funcionales dentro del alcance acordado.',
+      `Soporte técnico durante ${SUPPORT_MONTHS} meses.`,
+    ],
+  },
+];
+
+const totales = [
+  { label: 'ONN configurada, sin instalación presencial', value: quote({ equipment: 'included', installation: 'none' }).total },
+  { label: 'ONN configurada, con instalación presencial', value: quote({ equipment: 'included', installation: 'onsite' }).total },
+  { label: 'Equipo del cliente configurado, sin instalación', value: quote({ equipment: 'customer', installation: 'none' }).total },
+  { label: 'Equipo del cliente configurado, con instalación', value: quote({ equipment: 'customer', installation: 'onsite' }).total },
+];
+
+const noIncluido = [
+  'Licencias o pagos a terceros.',
+  'Reparaciones físicas.',
+  'Reemplazo de hardware.',
+  'Configuración de dispositivos adicionales.',
+  'Desarrollo de software a medida.',
+  'Recuperación garantizada de información después de un restablecimiento.',
+  'Funcionamiento garantizado de aplicaciones o servicios externos.',
+];
+---
+
+<PageLayout
+  title={`Condiciones del servicio — ${SITE.name}`}
+  description="Modalidades, precios, instalación, cobertura y exclusiones del servicio de configuración de TV Box de MVGN Play."
+  eyebrow="Condiciones del servicio"
+  heading="Condiciones comerciales"
+  lede="Este documento resume las condiciones vigentes del servicio. Los importes se expresan en pesos mexicanos (MXN)."
+>
+  <section>
+    <h2>Modalidades</h2>
+    {
+      modalidades.map((modalidad) => (
+        <div class="mt-6 rounded-panel border border-line bg-surface/40 p-5">
+          <div class="flex flex-wrap items-baseline justify-between gap-2">
+            <h3 class="font-display text-lg font-semibold text-ink">{modalidad.name}</h3>
+            <span class="font-mono text-sm text-cool">{formatMXN(modalidad.price)}</span>
+          </div>
+          <ul class="mt-3">
+            {modalidad.includes.map((item) => (
+              <li>{item}</li>
+            ))}
+          </ul>
+        </div>
+      ))
+    }
+    <p class="mt-6">
+      Los equipos se entregan probados, con los accesorios correspondientes al producto adquirido y con instrucciones
+      básicas de uso. La modalidad B está condicionada a que el equipo sea compatible, funcional y técnicamente apto. Si
+      el dispositivo requiere reparación física, sustitución de componentes o una intervención extraordinaria, se
+      informará al cliente antes de continuar.
+    </p>
+  </section>
+
+  <section>
+    <h2>Instalación presencial y totales</h2>
+    <p>
+      La instalación presencial es un cargo adicional de {formatMXN(PRICING.onsiteInstallation)} que puede añadirse a
+      cualquiera de las modalidades anteriores. Corresponde a una visita dentro de la zona de cobertura definida
+      comercialmente; los domicilios fuera de esa zona pueden requerir una cotización de traslado.
+    </p>
+    <ul>
+      {
+        totales.map((total) => (
+          <li>
+            {total.label}: <strong>{formatMXN(total.value)}</strong>
+          </li>
+        ))
+      }
+    </ul>
+    <p>
+      Los envíos fuera de la Zona Metropolitana de Guadalajara no están incluidos en el precio del equipo y se cotizan
+      por separado. El traslado fuera de la zona de cobertura tampoco se suma automáticamente.
+    </p>
+  </section>
+
+  <section>
+    <h2>Soporte técnico</h2>
+    <p>
+      Las modalidades A y B incluyen {SUPPORT_MONTHS} meses de soporte técnico desde la activación registrada, con el
+      alcance y las exclusiones descritos en <a href="/soporte">soporte técnico</a>.
+    </p>
+    <p>
+      El pago contratado cubre la capa de aplicaciones y su soporte: si una aplicación deja de funcionar, se busca y se
+      configura una alternativa técnicamente viable durante el periodo contratado. No se garantiza equivalencia exacta de
+      funciones ni de contenido, ni que una aplicación externa permanezca disponible.
+    </p>
+  </section>
+
+  <section>
+    <h2>No incluido automáticamente</h2>
+    <ul>
+      {noIncluido.map((item) => <li>{item}</li>)}
+    </ul>
+    <p>
+      Las aplicaciones incluidas están configuradas para ver películas, series y televisión, y su alcance puede cambiar
+      con el tiempo. Pertenecen a sus titulares y su funcionamiento no depende de {SITE.name}.
+    </p>
+  </section>
+
+  <section>
+    <h2>Marcas de terceros</h2>
+    <p>
+      {SITE.name} no es distribuidor oficial de ONN ni mantiene afiliación con las marcas o servicios mencionados. Las
+      referencias se hacen únicamente con fines descriptivos del servicio de configuración.
+    </p>
+  </section>
+
+  <section>
+    <h2>Vigencia de esta página</h2>
+    <p>
+      Los contenidos, precios, características y condiciones están sujetos a revisión antes de la publicación comercial.
+      Este documento es un borrador operativo y debe validarse comercial y legalmente antes de su publicación definitiva.
+    </p>
+  </section>
+</PageLayout>

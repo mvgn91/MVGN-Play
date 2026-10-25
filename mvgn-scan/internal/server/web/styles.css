@@ -1,0 +1,142 @@
+* { margin:0; padding:0; box-sizing:border-box }
+
+:root {
+  --bg: #08080e;
+  --surface: #0f0f1a;
+  --border: #1e1e32;
+  --crimson: #d6001c;
+  --crimson-glow: rgba(214,0,28,0.15);
+  --green: #50c878;
+  --yellow: #dcb43c;
+  --red: #ff2830;
+  --blue: #3b82f6;
+  --white: #e8e8ed;
+  --muted: #5c5c6e;
+  --secondary: #9898a8;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--white);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.bg-glow {
+  position: fixed; inset:0;
+  background: radial-gradient(ellipse at 50% 0%, var(--crimson-glow) 0%, transparent 70%);
+  pointer-events: none;
+  z-index:0;
+}
+
+.container { position:relative; z-index:1; max-width:960px; margin:0 auto; padding:24px 20px }
+
+/* ─── HEADER ─── */
+.header { display:flex; align-items:center; gap:20px; margin-bottom:28px; flex-wrap:wrap }
+.logo pre {
+  font-family: 'Cascadia Code', 'Fira Code', 'JetBrains Mono', monospace;
+  font-size:10px; line-height:1.15; color:var(--crimson);
+  text-shadow: 0 0 8px var(--crimson-glow);
+}
+.header-info { display:flex; gap:8px; flex-wrap:wrap; margin-left:auto }
+.badge {
+  padding:4px 12px; border-radius:20px; font-size:12px; font-weight:600;
+  letter-spacing:0.5px; background:var(--surface); border:1px solid var(--border);
+}
+.badge.runtime { color:var(--crimson); border-color:var(--crimson) }
+.badge.status { color:var(--green); border-color:var(--green) }
+.badge.location { color:var(--secondary); border-color:var(--border) }
+
+/* ─── METRIC CARDS GRID ─── */
+.grid { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-bottom:16px }
+.card {
+  background:var(--surface); border:1px solid var(--border); border-radius:12px;
+  padding:20px; transition:border-color 0.3s, box-shadow 0.3s;
+}
+.card:hover { border-color:var(--crimson); box-shadow:0 0 20px var(--crimson-glow) }
+
+.metric-card { text-align:center }
+.card-label {
+  font-size:11px; font-weight:700; letter-spacing:2px; color:var(--muted);
+  margin-bottom:8px;
+}
+.card-value { font-size:28px; font-weight:700; min-height:36px }
+#card-version .card-value { color:var(--crimson) }
+#card-status .card-value { font-size:32px }
+#card-phase .card-value { color:var(--secondary) }
+
+/* ─── HEALTH RING ─── */
+.health-ring { width:64px; height:64px; margin:0 auto }
+.ring-svg { width:100%; height:100% }
+.ring-bg { fill:none; stroke:var(--border); stroke-width:2.8 }
+.ring-fill { fill:none; stroke:var(--green); stroke-width:2.8; stroke-linecap:round; transition:stroke-dasharray 0.5s, stroke 0.3s }
+.ring-text { fill:var(--white); font-size:8px; font-weight:700; text-anchor:middle; dominant-baseline:central }
+
+/* ─── TASK CARD ─── */
+.task-card { margin-bottom:16px }
+.card-title {
+  font-size:11px; font-weight:700; letter-spacing:2px; color:var(--crimson);
+  margin-bottom:12px;
+}
+.task-id { font-size:13px; color:var(--secondary); margin-bottom:4px; font-family:monospace }
+.task-desc { font-size:15px; color:var(--white); margin-bottom:16px; line-height:1.4 }
+
+.progress-section { margin-bottom:16px }
+.progress-header { display:flex; justify-content:space-between; font-size:11px; color:var(--muted); margin-bottom:6px; font-weight:600; letter-spacing:1px }
+.progress-track {
+  height:8px; background:var(--bg); border-radius:4px; overflow:hidden;
+}
+.progress-fill {
+  height:100%; border-radius:4px; background:linear-gradient(90deg, var(--crimson), var(--crimson));
+  transition:width 0.5s ease;
+  box-shadow:0 0 8px var(--crimson-glow);
+}
+
+.task-meta { display:flex; gap:32px }
+.meta-item { }
+.meta-label { font-size:11px; color:var(--muted); display:block; margin-bottom:2px; font-weight:600; letter-spacing:1px }
+.meta-value { font-size:14px; color:var(--white) }
+
+/* ─── SPLIT ─── */
+.split { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px }
+
+/* ─── TIMELINE ─── */
+.timeline { max-height:180px; overflow-y:auto }
+.timeline-item {
+  display:flex; align-items:center; gap:10px; padding:6px 0;
+  border-bottom:1px solid var(--border); font-size:13px;
+}
+.timeline-item:last-child { border-bottom:none }
+.timeline-dot { width:8px; height:8px; border-radius:50%; background:var(--green); flex-shrink:0 }
+.timeline-dot.telemetry { background:var(--secondary) }
+.timeline-agent { color:var(--white); font-weight:500 }
+.timeline-action { color:var(--muted); font-size:12px }
+.timeline-empty { color:var(--muted); font-size:13px; padding:8px 0 }
+
+/* ─── NEXT ACTION ─── */
+.next-content { font-size:13px; color:var(--secondary); line-height:1.5 }
+
+/* ─── FOOTER ─── */
+.footer {
+  display:flex; justify-content:space-between; padding:16px 0;
+  border-top:1px solid var(--border); font-size:12px; color:var(--muted);
+  flex-wrap:wrap; gap:8px;
+}
+.footer-left { display:flex; gap:8px; align-items:center }
+.sep { color:var(--border) }
+
+/* ─── STATUS COLORS ─── */
+.status-completed { color:var(--green) !important; border-color:var(--green) !important }
+.status-in_progress { color:var(--yellow) !important; border-color:var(--yellow) !important }
+.status-pending { color:var(--blue) !important; border-color:var(--blue) !important }
+.status-failed { color:var(--red) !important; border-color:var(--red) !important }
+.status-idle { color:var(--muted) !important; border-color:var(--border) !important }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width:700px) {
+  .grid { grid-template-columns:repeat(2,1fr) }
+  .split { grid-template-columns:1fr }
+  .header { flex-direction:column; align-items:flex-start }
+  .header-info { margin-left:0 }
+}

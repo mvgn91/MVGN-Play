@@ -1,0 +1,100 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import WhatsAppCta from '@/components/ui/WhatsAppCta.astro';
+import { SUPPORT_MONTHS } from '@/config/commerce';
+import { SITE } from '@/config/site';
+
+const alcance = [
+  'Orientación sobre la configuración entregada.',
+  'Diagnóstico de incidencias relacionadas con aplicaciones.',
+  'Reinstalación o reajuste de las aplicaciones incluidas.',
+  'Corrección de configuraciones defectuosas.',
+  'Búsqueda y configuración de una alternativa cuando una aplicación deja de funcionar.',
+  'Ajustes derivados de actualizaciones compatibles.',
+  'Instrucciones para resolver problemas de uso.',
+  'Asistencia remota cuando resulte técnicamente viable.',
+];
+
+const exclusiones = [
+  'Reparación física, daños eléctricos, por líquidos o golpes.',
+  'Problemas causados por fallas de hardware.',
+  'Atención a equipos adicionales.',
+  'Desarrollo de aplicaciones.',
+  'Licencias o pagos de terceros.',
+  'Recuperación garantizada de datos.',
+  'Acceso a cuentas ajenas.',
+  'Disponibilidad garantizada del contenido de las aplicaciones incluidas.',
+];
+---
+
+<PageLayout
+  title={`Soporte técnico — ${SITE.name}`}
+  description="Vigencia, alcance, atención de incidencias y exclusiones del soporte técnico de 12 meses de MVGN Play."
+  eyebrow="Soporte"
+  heading="Qué cubre el soporte técnico"
+  lede={`${SUPPORT_MONTHS} meses de asistencia a partir de la fecha de activación registrada, vinculados al dispositivo y a la configuración contratada.`}
+>
+  <section>
+    <h2>Vigencia</h2>
+    <p>
+      El soporte tiene una duración de {SUPPORT_MONTHS} meses a partir de la fecha de activación registrada. Cada
+      contratación se vincula a un dispositivo y a la configuración cubierta por el servicio.
+    </p>
+  </section>
+
+  <section>
+    <h2>Alcance</h2>
+    <p>El soporte comprende:</p>
+    <ul>
+      {alcance.map((item) => <li>{item}</li>)}
+    </ul>
+  </section>
+
+  <section>
+    <h2>Cambios y sustituciones de aplicaciones</h2>
+    <p>
+      Las aplicaciones y los métodos de configuración están sujetos a cambios, actualizaciones, incompatibilidades y
+      posibles discontinuaciones. La capa de aplicaciones es el activo principal del servicio: cuando una herramienta
+      deja de funcionar, buscamos y configuramos una alternativa técnicamente viable dentro del periodo de soporte.
+    </p>
+    <p>
+      No garantizamos que la alternativa reproduzca todas las funciones, que su contenido sea idéntico ni que permanezca
+      disponible durante el resto del periodo contratado. Lo que sí cubre el soporte es ocuparse de que la cobertura de
+      contenido siga funcionando.
+    </p>
+    <p>La sustitución de una aplicación puede modificar la interfaz, la disponibilidad de funciones y la experiencia de uso.</p>
+  </section>
+
+  <section>
+    <h2>Atención de incidencias</h2>
+    <p>
+      El canal principal es WhatsApp. Horario inicial propuesto: lunes a viernes, días hábiles. El tiempo objetivo de
+      primera respuesta es de hasta dos días hábiles.
+    </p>
+    <p>
+      La primera respuesta puede consistir en una solicitud de información, un diagnóstico preliminar o la indicación
+      del siguiente paso; no implica que toda incidencia quede resuelta en ese plazo. El tiempo de resolución depende de
+      la complejidad del problema y de la disponibilidad de herramientas, actualizaciones y servicios externos.
+    </p>
+  </section>
+
+  <section>
+    <h2>Exclusiones y límites</h2>
+    <p>El soporte anual no equivale a soporte ilimitado para cualquier equipo, software o incidencia. No incluye:</p>
+    <ul>
+      {exclusiones.map((item) => <li>{item}</li>)}
+    </ul>
+    <p>Las exclusiones no limitan los derechos legales que correspondan al consumidor.</p>
+  </section>
+
+  <section>
+    <h2>Contacto de soporte</h2>
+    <p>
+      Para incidencias o dudas sobre la configuración entregada, escribe por WhatsApp indicando tu modalidad. Las
+      condiciones comerciales completas están en <a href="/condiciones">condiciones del servicio</a>.
+    </p>
+    <div class="mt-5">
+      <WhatsAppCta label="Escribir por WhatsApp" variant="primary" />
+    </div>
+  </section>
+</PageLayout>

@@ -1,0 +1,217 @@
+@import 'tailwindcss';
+
+/* ─────────────────────────────────────────────────────────────
+   Tema oscuro (por defecto, identidad de marca) — PRD §7.2
+   Tema claro: mismos roles, contraste AA sobre fondo claro.
+   El tema se aplica con `data-theme` en <html> y se persiste en
+   localStorage (`mvgn-theme`).
+   ───────────────────────────────────────────────────────────── */
+:root,
+[data-theme='dark'] {
+  --bg: #08090d;
+  --surface: #12151d;
+  --surface-elevated: #1b202b;
+  --crimson: #dc143c;
+  --crimson-deep: #a30f2d;
+  --cool: #38bdf8;
+  --ink: #f5f7fb;
+  --ink-muted: #9aa4b2;
+  --line: #293140;
+  --line-strong: #3b475c;
+  --shadow-color: rgb(0 0 0 / 0.55);
+  --nav-bg: rgb(18 21 29 / 0.72);
+  --grid-line: rgb(255 255 255 / 0.05);
+  color-scheme: dark;
+}
+
+[data-theme='light'] {
+  --bg: #f5f5f2;
+  --surface: #ffffff;
+  --surface-elevated: #eceef1;
+  --crimson: #c8102e;
+  --crimson-deep: #9c0b23;
+  --cool: #0369a1;
+  --ink: #0c1116;
+  --ink-muted: #4a5563;
+  --line: #d8dce2;
+  --line-strong: #bcc3cd;
+  --shadow-color: rgb(15 23 42 / 0.14);
+  --nav-bg: rgb(255 255 255 / 0.72);
+  --grid-line: rgb(15 23 42 / 0.06);
+  color-scheme: light;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-elevated: var(--surface-elevated);
+  --color-crimson: var(--crimson);
+  --color-crimson-deep: var(--crimson-deep);
+  --color-cool: var(--cool);
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+
+  --font-display: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --font-body: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+
+  /* Sin esquinas redondeadas: alineado con los tokens de MVGN Labs */
+  --radius-panel: 0px;
+}
+
+/* ── Base ───────────────────────────────────────────────────── */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    /* la cápsula flotante no debe tapar los anclajes */
+    scroll-padding-top: 6.5rem;
+    overflow-x: clip;
+  }
+
+  body {
+    background-color: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: clip;
+    transition:
+      background-color 0.25s ease,
+      color 0.25s ease;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--cool);
+    outline-offset: 3px;
+  }
+
+  ::selection {
+    background: var(--crimson);
+    color: #fff;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+/* ── Utilidades ─────────────────────────────────────────────── */
+@utility label-tech {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+
+/* Resplandor crimson controlado, sin acumular efectos */
+@utility glow-crimson {
+  background-image: radial-gradient(
+    60% 60% at 50% 0%,
+    color-mix(in oklab, var(--crimson) 22%, transparent) 0%,
+    transparent 70%
+  );
+}
+
+/* Retícula técnica de fondo: da profundidad sin objetos decorativos */
+@utility bg-grid {
+  background-image:
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+  background-size: 4rem 4rem;
+}
+
+/* ── Movimiento al scroll ───────────────────────────────────────
+   El script añade data-motion="on" al <html> solo si el usuario
+   no pide movimiento reducido; sin ese atributo todo queda visible.
+   ─────────────────────────────────────────────────────────────── */
+[data-motion='on'] [data-reveal] {
+  opacity: 0;
+  transform: translate3d(0, 24px, 0);
+  transition:
+    opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay, 0s),
+    transform 0.75s cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay, 0s);
+}
+
+[data-motion='on'] [data-reveal].is-in {
+  opacity: 1;
+  transform: none;
+}
+
+[data-parallax] {
+  transform: translate3d(0, var(--py, 0px), 0);
+  will-change: transform;
+}
+
+/* Páginas documentales (/soporte, /condiciones, /privacidad) */
+@layer components {
+  .doc > section + section {
+    margin-top: 2.5rem;
+  }
+
+  .doc h2 {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    line-height: 1.35;
+    color: var(--ink);
+  }
+
+  .doc p {
+    margin-top: 0.75rem;
+    color: var(--ink-muted);
+    line-height: 1.7;
+  }
+
+  .doc ul,
+  .doc ol {
+    margin-top: 0.75rem;
+    display: grid;
+    gap: 0.5rem;
+    padding-left: 1.1rem;
+    color: var(--ink-muted);
+    list-style: disc;
+  }
+
+  .doc ol {
+    list-style: decimal;
+  }
+
+  .doc li::marker {
+    color: var(--crimson);
+  }
+
+  .doc a {
+    color: var(--cool);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  .doc strong {
+    color: var(--ink);
+    font-weight: 500;
+  }
+}

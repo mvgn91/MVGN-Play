@@ -1,0 +1,44 @@
+{
+  "$schema": "payload-manifest/2.0",
+  "description": "Manifest of files that constitute the distributed MVGN tool. package-release.ps1 packs EXACTLY this list. Since v5.3-consolidation ALL MVGN machinery installs under <project>/.mvgn/ — the project keeps only its own docs/, src/ and .gitignore.",
+  "version": "2.0.0",
+  "layout": "consolidated",
+  "payload_root": ".mvgn",
+  "payload": [
+    { "path": "NYX.md",                            "origin": "repo",   "dest": "NYX.md" },
+    { "path": "NYX.ps1",                           "origin": "repo",   "dest": "NYX.ps1" },
+    { "path": "MVGN.md",                           "origin": "repo",   "dest": "MVGN.md" },
+    { "path": "scripts/orchestrate.ps1",           "origin": "repo",   "dest": "scripts/orchestrate.ps1" },
+    { "path": "scripts/orchestrate.sh",            "origin": "repo",   "dest": "scripts/orchestrate.sh" },
+    { "path": "tools/mvgn-init.ps1",               "origin": "repo",   "dest": "tools/mvgn-init.ps1" },
+    { "path": "tools/bootstrap.ps1",               "origin": "repo",   "dest": "tools/bootstrap.ps1" },
+    { "path": "tools/package-release.ps1",         "origin": "repo",   "dest": "tools/package-release.ps1" },
+    { "path": "tools/install-profile.ps1",         "origin": "repo",   "dest": "tools/install-profile.ps1" },
+    { "path": "tools/mvgn-audio.ps1",              "origin": "repo",   "dest": "tools/mvgn-audio.ps1" },
+    { "path": "tools/observe.bat",                 "origin": "repo",   "dest": "tools/observe.bat" },
+    { "path": "tools/validate-entry-points.ps1",   "origin": "repo",   "dest": "tools/validate-entry-points.ps1" },
+    { "path": "tools/validate-schema.ps1",         "origin": "repo",   "dest": "tools/validate-schema.ps1" },
+    { "path": "templates/",                        "origin": "repo",   "dest": "templates/", "recursive": true, "note": "fuente canonica; mvgn-init.ps1 despliega desde aqui" }
+  ],
+  "deployed_by_init": [
+    { "source": "gitignore.template", "dest": "<project>/.gitignore" },
+    { "source": "docs/*",             "dest": "<project>/docs/" }
+  ],
+  "optional": [
+    {
+      "path": "mvgn-scan/",
+      "reason": "Observation Console (Go). Pending decision: ship prebuilt binaries per-OS vs require Go toolchain.",
+      "include_by_default": false
+    },
+    {
+      "path": "scripts/audio/",
+      "reason": "Audio Ingestion pipeline (GPU/CUDA probado): Faster-Whisper con device/compute_type, cola batch, registro processed.json. Requiere Python.",
+      "include_by_default": false
+    }
+  ],
+  "excluded_forever": [
+    "archive/", "reports/", "events/", "output/", "telemetry/", "bin/",
+    "docs/ (lab-internal)", ".atl/", ".mimocode/", ".kimchi/",
+    ".git history"
+  ]
+}

@@ -1,0 +1,28 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import SiteFooter from '@/layouts/SiteFooter.astro';
+import Hero from '@/components/hero/Hero.astro';
+import ShowcaseSection from '@/components/showcase/ShowcaseSection.astro';
+import DeviceSection from '@/components/commercial/DeviceSection.astro';
+import HowItWorks from '@/components/commercial/HowItWorks.astro';
+import PricingSection from '@/components/pricing/PricingSection.astro';
+import SupportSection from '@/components/commercial/SupportSection.astro';
+import CompatibilitySection from '@/components/commercial/CompatibilitySection.astro';
+import FaqSection from '@/components/commercial/FaqSection.astro';
+import FinalCta from '@/components/commercial/FinalCta.astro';
+import { SITE } from '@/config/site';
+---
+
+<BaseLayout title={`${SITE.name} — TV Box configurada y soporte técnico en Guadalajara`} description={SITE.description}>
+  <!-- Orden de secciones: PRD §8.1 -->
+  <Hero />
+  <ShowcaseSection />
+  <DeviceSection />
+  <HowItWorks />
+  <PricingSection />
+  <SupportSection />
+  <CompatibilitySection />
+  <FaqSection />
+  <FinalCta />
+  <SiteFooter />
+</BaseLayout>

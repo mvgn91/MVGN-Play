@@ -1,0 +1,93 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "MVGN Runtime Event",
+  "description": "Schema for Runtime events per ADR-002 and docs/07_runtime_spec.md",
+  "type": "object",
+  "required": ["id", "type", "timestamp", "actor", "session_id"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique event identifier (UUIDv4)"
+    },
+    "type": {
+      "type": "string",
+      "description": "Event type from the official catalog (ADR-004)",
+      "enum": [
+        "SESSION_STARTED", "SESSION_RESUMED", "SESSION_FROZEN", "SESSION_CLOSED",
+        "TASK_CREATED", "TASK_STARTED", "TASK_COMPLETED", "TASK_CANCELLED", "TASK_BLOCKED",
+        "GATE_APPROVED", "GATE_FAILED",
+        "RECOVERY_STARTED", "RECOVERY_FINISHED",
+        "PROFILE_CHANGED",
+        "SKILL_LOADED", "SKILL_UNLOADED",
+        "STATE_CHANGED", "RELEASE_CREATED", "MANIFEST_UPDATED", "ACTOR_REGISTERED",
+        "AGENT_ASSIGNED", "AGENT_COMPLETED",
+        "AGENT_REVIEW_STARTED", "AGENT_REVIEW_COMPLETED",
+        "REVIEW_FAILED", "REVIEW_APPROVED",
+        "PIPELINE_COMPLETED",
+        "CONFLICT_DETECTED", "CONFLICT_RESOLVED"
+      ]
+    },
+    "timestamp": {
+      "type": "string",
+      "description": "ISO 8601 with timezone",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(Z|[+-]\\d{2}:\\d{2})$"
+    },
+    "actor": {
+      "type": "object",
+      "description": "Actor who generated the event (ADR-005)",
+      "required": ["id", "type"],
+      "properties": {
+        "id": { "type": "string" },
+        "type": { "type": "string", "enum": ["ai", "human", "automation", "ci_cd", "script", "system"] },
+        "name": { "type": "string" },
+        "provider": { "type": "string" },
+        "model": { "type": "string" },
+        "adapter": { "type": "string" },
+        "metadata": { "type": "object" }
+      }
+    },
+    "session_id": {
+      "type": "string",
+      "description": "Session in which the event occurred"
+    },
+    "task_id": {
+      "type": "string",
+      "description": "Affected task (required for Task* events)"
+    },
+    "gate": {
+      "type": "string",
+      "description": "Gate code (required for Gate* events)"
+    },
+    "state": {
+      "type": "object",
+      "description": "State transition (required for STATE_CHANGED)",
+      "properties": {
+        "from": { "type": "string" },
+        "to": { "type": "string" }
+      }
+    },
+    "blocker": {
+      "type": "object",
+      "description": "Blocker information (required for blocked events)",
+      "properties": {
+        "code": { "type": "string" },
+        "reason": { "type": "string" }
+      }
+    },
+    "relationships": {
+      "type": "array",
+      "description": "Relationships to other events",
+      "items": {
+        "type": "object",
+        "properties": {
+          "parent_event": { "type": "string" },
+          "relationship": { "type": "string", "enum": ["concludes", "implements", "precedes", "triggers", "responds_to"] }
+        }
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Additional context"
+    }
+  }
+}

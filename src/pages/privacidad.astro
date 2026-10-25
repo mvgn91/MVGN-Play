@@ -1,0 +1,73 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import { SITE } from '@/config/site';
+---
+
+<PageLayout
+  title={`Aviso de privacidad — ${SITE.name}`}
+  description="Qué datos personales trata MVGN Play, con qué finalidad y cómo ejercer tus derechos."
+  eyebrow="Privacidad"
+  heading="Aviso de privacidad"
+  lede="Borrador operativo. El responsable, domicilio y medio de contacto directo deben completarse antes de publicar."
+>
+  <section>
+    <h2>Responsable</h2>
+    <p>
+      El responsable del tratamiento de tus datos personales es {SITE.name} ({SITE.parent}). La razón social, domicilio y
+      medio de contacto directo para asuntos de privacidad están <strong>pendientes de completarse</strong> por el
+      operador antes de la publicación.
+    </p>
+  </section>
+
+  <section>
+    <h2>Datos que tratamos</h2>
+    <ul>
+      <li>Datos de contacto que nos compartes al escribirnos: nombre, número de teléfono y el contenido de tus mensajes.</li>
+      <li>Información del equipo o televisor que nos describes para evaluar compatibilidad y cotizar el servicio.</li>
+      <li>Datos necesarios para la prestación del servicio contratado y su soporte.</li>
+    </ul>
+    <p>
+      No solicitamos contraseñas de tus aplicaciones ni de cuentas personales. Si un procedimiento requiriera acceso a
+      una cuenta, se acordará contigo de forma explícita y no se almacenará la credencial.
+    </p>
+  </section>
+
+  <section>
+    <h2>Finalidades</h2>
+    <ul>
+      <li>Atender consultas y solicitudes de cotización.</li>
+      <li>Prestar el servicio de configuración, instalación y soporte contratado.</li>
+      <li>Dar seguimiento a incidencias dentro del periodo de soporte.</li>
+      <li>Cumplir obligaciones legales o requerimientos de autoridad competente.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Canales y terceros</h2>
+    <p>
+      La conversación comercial y de soporte ocurre por WhatsApp. Al usar ese canal, el tratamiento de los mensajes por
+      parte del proveedor de mensajería se rige por sus propias políticas, sobre las que {SITE.name} no tiene control.
+    </p>
+    <p>
+      Esta primera versión del sitio no incorpora rastreadores publicitarios ni herramientas de analítica de terceros. Si
+      se incorporan en el futuro, este aviso se actualizará antes de activarlas.
+    </p>
+  </section>
+
+  <section>
+    <h2>Tus derechos</h2>
+    <p>
+      Puedes solicitar el acceso, rectificación, cancelación u oposición al tratamiento de tus datos, así como retirar tu
+      consentimiento, escribiendo al medio de contacto que se publique en esta página. La solicitud se atenderá conforme a
+      los plazos y requisitos de la legislación aplicable en materia de protección de datos personales.
+    </p>
+  </section>
+
+  <section>
+    <h2>Cambios a este aviso</h2>
+    <p>
+      Cualquier cambio sustancial se publicará en esta misma ruta antes de aplicarse. La fecha de la última actualización
+      se indicará al pie del documento cuando el aviso quede en su versión definitiva.
+    </p>
+  </section>
+</PageLayout>

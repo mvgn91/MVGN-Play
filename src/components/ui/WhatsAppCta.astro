@@ -1,0 +1,46 @@
+---
+// CTA de WhatsApp con mensaje contextual (PRD §12.2).
+// Sin número comercial no se inventa un enlace: se declara el pendiente.
+import { whatsappLink, type Equipment, type Installation } from '@/config/commerce';
+
+interface Props {
+  label: string;
+  equipment?: Equipment;
+  installation?: Installation;
+  variant?: 'primary' | 'secondary';
+  class?: string;
+}
+
+const {
+  label,
+  equipment = 'included',
+  installation = 'none',
+  variant = 'primary',
+  class: className = '',
+} = Astro.props;
+
+const href = whatsappLink({ equipment, installation });
+
+const base =
+  'inline-flex items-center justify-center gap-2 rounded-none px-6 py-3 text-sm font-medium transition-colors';
+const styles =
+  variant === 'primary'
+    ? 'bg-crimson text-white hover:bg-crimson-deep'
+    : 'border border-line text-ink hover:border-ink/40 hover:bg-surface';
+---
+
+{
+  href ? (
+    <a href={href} target="_blank" rel="noopener noreferrer" class:list={[base, styles, className]}>
+      {label}
+      <span aria-hidden="true">↗</span>
+    </a>
+  ) : (
+    <div class:list={['rounded-none border border-dashed border-line px-5 py-4 text-sm', className]}>
+      <p class="text-ink">{label}</p>
+      <p class="mt-1 text-xs text-ink-muted">
+        El canal de WhatsApp se habilita cuando se defina el número comercial.
+      </p>
+    </div>
+  )
+}

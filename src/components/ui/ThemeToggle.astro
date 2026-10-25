@@ -1,0 +1,94 @@
+---
+interface Props {
+  class?: string;
+  /** Variante visual: cápsula de la nav o pie. */
+  variant?: 'nav' | 'footer';
+}
+
+const { class: className = '', variant = 'nav' } = Astro.props;
+
+const size = variant === 'nav' ? 'h-9 w-9' : 'h-8 w-8';
+---
+
+<button
+  type="button"
+  data-theme-toggle
+  data-theme-state="dark"
+  aria-pressed="false"
+  aria-label="Cambiar a tema claro"
+  title="Cambiar tema"
+  class:list={[
+    'inline-flex items-center justify-center rounded-none border border-line text-ink-muted transition-colors hover:border-line-strong hover:text-ink',
+    size,
+    className,
+  ]}
+>
+  <!-- Sol: se muestra en tema oscuro (acción: pasar a claro) -->
+  <svg
+    class="icon-sun h-4 w-4"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.6"
+    stroke-linecap="round"
+    aria-hidden="true"
+  >
+    <circle cx="12" cy="12" r="4"></circle>
+    <path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"></path>
+  </svg>
+  <!-- Luna: se muestra en tema claro (acción: pasar a oscuro) -->
+  <svg
+    class="icon-moon h-4 w-4"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.6"
+    stroke-linecap="round"
+    aria-hidden="true"
+  >
+    <path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5Z"></path>
+  </svg>
+</button>
+
+<style>
+  [data-theme-state='dark'] .icon-moon {
+    display: none;
+  }
+
+  [data-theme-state='light'] .icon-sun {
+    display: none;
+  }
+</style>
+
+<script>
+  const STORAGE_KEY = 'mvgn-theme';
+  const root = document.documentElement;
+
+  const sync = (theme: string) => {
+    root.dataset.theme = theme;
+    const isLight = theme === 'light';
+
+    const meta = document.querySelector<HTMLMetaElement>('meta[data-theme-color]');
+    if (meta) meta.content = isLight ? '#f5f5f2' : '#08090d';
+
+    document.querySelectorAll<HTMLElement>('[data-theme-toggle]').forEach((button) => {
+      button.dataset.themeState = theme;
+      button.setAttribute('aria-pressed', String(isLight));
+      button.setAttribute('aria-label', isLight ? 'Cambiar a tema oscuro' : 'Cambiar a tema claro');
+    });
+  };
+
+  sync(root.dataset.theme ?? 'dark');
+
+  document.querySelectorAll<HTMLElement>('[data-theme-toggle]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const next = root.dataset.theme === 'light' ? 'dark' : 'light';
+      try {
+        localStorage.setItem(STORAGE_KEY, next);
+      } catch {
+        /* modo privado: el tema cambia igual, solo no se recuerda */
+      }
+      sync(next);
+    });
+  });
+</script>

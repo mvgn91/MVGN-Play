@@ -1,0 +1,108 @@
+---
+// Presentación del dispositivo (PRD §9.4) — v3: comparación de los dos caminos.
+// Sin ficha técnica: los datos que repetían otras secciones (soporte, cobertura,
+// precios) viven donde corresponde. Aquí solo se explica en qué se diferencian.
+const paths = [
+  {
+    badge: 'Equipo incluido',
+    title: 'ONN 4K',
+    lead: 'Llega listo: configurado, probado y con sus accesorios.',
+    points: [
+      'No tienes que buscar equipo ni investigar qué comprar.',
+      'Lo conectas y arrancas con la interfaz ya ordenada.',
+      'Entrega coordinada en la Zona Metropolitana de Guadalajara.',
+    ],
+    featured: true,
+  },
+  {
+    badge: 'Tu propio equipo',
+    title: 'Tu TV Box',
+    lead: 'Si ya tienes equipo, lo dejamos funcionando igual.',
+    points: [
+      'Revisamos compatibilidad y estado antes de aceptar el servicio.',
+      'Si requiere reparación física, te avisamos antes de intervenir.',
+      'La configuración y las aplicaciones quedan igual de ajustadas.',
+    ],
+    featured: false,
+  },
+];
+
+const requirements = ['Entrada HDMI', 'Internet estable', 'Cuenta de Google', 'Televisor compatible'];
+---
+
+<section id="equipo" class="scroll-mt-28 border-t border-line/60">
+  <div class="mx-auto w-full max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
+    <div class="max-w-2xl" data-reveal>
+      <p class="label-tech">El equipo</p>
+      <h2 class="mt-3 text-3xl font-semibold sm:text-4xl">Dos caminos, la misma configuración.</h2>
+      <p class="mt-4 text-ink-muted">
+        La diferencia no está en lo que ves al encender: está en si el equipo lo ponemos nosotros o ya lo tienes tú.
+      </p>
+    </div>
+
+    <div class="mt-10 grid gap-4 md:grid-cols-2">
+      {
+        paths.map((path) => (
+          <article
+            data-reveal
+            class:list={[
+              'relative overflow-hidden rounded-panel border p-6',
+              path.featured ? 'border-crimson/50 bg-crimson/[0.05]' : 'border-line bg-surface/50',
+            ]}
+          >
+            <div class="flex items-baseline justify-between gap-3">
+              <p class="label-tech">{path.badge}</p>
+              {path.featured && (
+                <span class="rounded-none border border-crimson/50 px-2.5 py-0.5 font-mono text-[0.625rem] text-crimson">
+                  incluido
+                </span>
+              )}
+            </div>
+
+            <h3 class="mt-3 font-display text-2xl font-semibold">{path.title}</h3>
+            <p class="mt-2 text-sm text-ink-muted">{path.lead}</p>
+
+            <ul class="mt-5 space-y-2.5 border-t border-line/70 pt-4 text-sm text-ink-muted">
+              {path.points.map((point) => (
+                <li class="flex gap-3">
+                  <span
+                    aria-hidden="true"
+                    class:list={[
+                      'mt-1.5 h-1 w-1 shrink-0 rounded-none',
+                      path.featured ? 'bg-crimson' : 'bg-line-strong',
+                    ]}
+                  />
+                  {point}
+                </li>
+              ))}
+            </ul>
+          </article>
+        ))
+      }
+    </div>
+
+    <div
+      class="mt-6 flex flex-col gap-3 rounded-panel border border-line/70 px-5 py-4 sm:flex-row sm:items-center sm:justify-between"
+      data-reveal
+    >
+      <div class="flex flex-wrap items-center gap-x-5 gap-y-2">
+        <p class="label-tech">Requisitos</p>
+        {
+          requirements.map((requirement) => (
+            <span class="font-mono text-[0.6875rem] text-ink-muted">{requirement}</span>
+          ))
+        }
+      </div>
+      <a
+        href="/#precios"
+        class="shrink-0 text-sm text-cool underline-offset-4 hover:underline"
+      >
+        Ver qué cambia en el precio
+      </a>
+    </div>
+
+    <p class="mt-3 text-xs text-ink-muted">
+      Los requisitos y especificaciones se validan sobre el modelo exacto antes de la publicación comercial.
+    </p>
+  </div>
+</section>

@@ -1,0 +1,22 @@
+---
+// Sección "Experiencia personalizada" (PRD §9.3). La isla React solo se hidrata
+// cuando entra en viewport: la landing sigue sin JS hasta ese punto.
+import ExperienceShowcase from '@/components/showcase/ExperienceShowcase';
+---
+
+<section id="servicio" class="scroll-mt-24 border-t border-line/60">
+  <div class="mx-auto w-full max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
+    <div class="max-w-2xl" data-reveal>
+      <p class="label-tech">Experiencia personalizada</p>
+      <h2 class="mt-3 text-3xl font-semibold sm:text-4xl">Configurada para tu forma de ver televisión.</h2>
+      <p class="mt-4 text-ink-muted">
+        El activo del servicio es la capa de aplicaciones: cómo queda la pantalla de inicio, qué aplicaciones se
+        ajustan y qué ocurre cuando algo deja de funcionar. Explora cada una.
+      </p>
+    </div>
+
+    <div class="mt-10" data-reveal style="--reveal-delay: 0.08s">
+      <ExperienceShowcase client:visible />
+    </div>
+  </div>
+</section>

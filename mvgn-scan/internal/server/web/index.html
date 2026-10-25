@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MVGN Observer</title>
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<div class="bg-glow"></div>
+
+<div class="container">
+  <header class="header">
+    <div class="logo">
+      <pre class="ascii">███╗   ███╗██╗   ██╗ ██████╗ ███╗   ██╗
+████╗ ████║██║   ██║██╔════╝ ████╗  ██║
+██╔████╔██║██║   ██║██║  ███╗██╔██╗ ██║
+██║╚██╔╝██║╚██╗ ██╔╝██║   ██║██║╚██╗██║
+██║ ╚═╝ ██║ ╚████╔╝ ╚██████╔╝██║ ╚████║
+╚═╝     ╚═╝  ╚═══╝   ╚═════╝ ╚═╝  ╚═══╝</pre>
+    </div>
+    <div class="header-info">
+      <span class="badge runtime" id="version-badge">v--</span>
+      <span class="badge status" id="status-badge">⚪ OFFLINE</span>
+      <span class="badge location" id="location-badge">📁 --</span>
+    </div>
+  </header>
+
+  <div class="grid" id="metric-grid">
+    <div class="card metric-card" id="card-version">
+      <div class="card-label">VERSION</div>
+      <div class="card-value" id="metric-version">--</div>
+    </div>
+    <div class="card metric-card" id="card-status">
+      <div class="card-label">STATUS</div>
+      <div class="card-value" id="metric-status">⚪</div>
+    </div>
+    <div class="card metric-card" id="card-phase">
+      <div class="card-label">PHASE</div>
+      <div class="card-value" id="metric-phase">-</div>
+    </div>
+    <div class="card metric-card" id="card-health">
+      <div class="card-label">HEALTH</div>
+      <div class="card-value" id="metric-health">
+        <div class="health-ring">
+          <svg viewBox="0 0 36 36" class="ring-svg">
+            <path class="ring-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+            <path class="ring-fill" id="health-ring-fill" stroke-dasharray="0, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+            <text x="18" y="20.5" class="ring-text" id="health-text">0%</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="card metric-card" id="card-atenea">
+      <div class="card-label">ATENEA</div>
+      <div class="card-value" id="metric-atenea">--</div>
+    </div>
+  </div>
+
+  <div class="card task-card" id="task-card">
+    <div class="card-title" id="task-title">CURRENT TASK</div>
+    <div class="task-id" id="task-id">--</div>
+    <div class="task-desc" id="task-desc">Waiting for data...</div>
+    <div class="progress-section">
+      <div class="progress-header">
+        <span>PROGRESS</span>
+        <span class="progress-pct" id="progress-pct">0%</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" id="progress-fill" style="width:0%"></div>
+      </div>
+    </div>
+    <div class="task-meta">
+      <div class="meta-item">
+        <span class="meta-label">Agents</span>
+        <span class="meta-value" id="task-agents">--</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Artifacts</span>
+        <span class="meta-value" id="task-artifacts">--</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="split">
+    <div class="card timeline-card">
+      <div class="card-title">EVENT TIMELINE</div>
+      <div class="timeline" id="timeline">
+        <div class="timeline-empty">No events yet</div>
+      </div>
+    </div>
+
+    <div class="card next-card">
+      <div class="card-title">NEXT ACTION</div>
+      <div class="next-content" id="next-action">--</div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-left">
+      <span id="poll-info">Polling every 5s</span>
+      <span class="sep">·</span>
+      <span id="last-update">--:--:--</span>
+    </div>
+    <div class="footer-right">
+      <span>Crimson Nexus Corp · MVGN Labs · Node MX-03</span>
+    </div>
+  </footer>
+</div>
+
+<script src="/app.js"></script>
+</body>
+</html>

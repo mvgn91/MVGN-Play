@@ -1,0 +1,61 @@
+{
+  "runtime_version": "5.3.0",
+  "schema_version": "5.3.0",
+  "profile": "lite",
+  "execution_mode": "NORMAL",
+  "capabilities": {
+    "blackboard": true,
+    "collaboration": true,
+    "handoff": true,
+    "dual_entry": true,
+    "archival": true,
+    "orchestration": true,
+    "audio_ingestion": true
+  },
+  "audio": {
+    "engine": "faster-whisper",
+    "default_model": "small",
+    "supported_formats": [
+      ".mp3",
+      ".wav",
+      ".m4a",
+      ".flac",
+      ".ogg"
+    ],
+    "pipeline_states": [
+      "AUDIO_DISCOVERY",
+      "TRANSCRIBING",
+      "CONTEXT_BUILDING",
+      "CONTEXT_READY"
+    ]
+  },
+  "actors": [
+    {
+      "provider": "deepseek",
+      "model": "deepseek-v4-flash",
+      "name": "Buffy",
+      "id": "agent-buffy",
+      "type": "ai",
+      "role": "freebuff-revisor"
+    },
+    {
+      "provider": "deepseek",
+      "model": "deepseek-v4-flash",
+      "name": "OpenCode",
+      "id": "agent-opencode",
+      "type": "ai",
+      "role": "generator"
+    }
+  ],
+  "policies": {
+    "deprecation": true,
+    "context_budget_protection": true,
+    "powershell_only": true,
+    "rollback_available": true
+  },
+  "entry_points": {
+    "universal": "NYX.md",
+    "imperative": "NYX.ps1",
+    "validator": "tools/validate-entry-points.ps1"
+  }
+}

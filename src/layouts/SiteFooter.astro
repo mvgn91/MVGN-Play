@@ -1,0 +1,159 @@
+---
+// Footer (PRD §9.11) — rediseño: wordmark de gran formato, columnas
+// funcionales y barra inferior con aviso legal y conmutador de tema.
+import { SITE } from '@/config/site';
+import { formatPhone, whatsappLink } from '@/config/commerce';
+import ThemeToggle from '@/components/ui/ThemeToggle.astro';
+
+const contactLink = whatsappLink();
+const phone = formatPhone();
+const year = new Date().getFullYear();
+
+const columns = [
+  {
+    title: 'Servicio',
+    links: [
+      { href: '/#servicio', label: 'Experiencia' },
+      { href: '/#equipo', label: 'El equipo' },
+      { href: '/#precios', label: 'Precios' },
+      { href: '/#faq', label: 'Preguntas frecuentes' },
+    ],
+  },
+  {
+    title: 'Legal',
+    links: [
+      { href: '/soporte', label: 'Soporte técnico' },
+      { href: '/condiciones', label: 'Condiciones del servicio' },
+      { href: '/privacidad', label: 'Aviso de privacidad' },
+    ],
+  },
+];
+---
+
+<footer class="relative border-t border-line">
+  <div class="mx-auto w-full max-w-6xl px-5 pt-14 pb-8 sm:px-8 sm:pt-16">
+    <!-- Identidad + acción -->
+    <div class="flex flex-col gap-8 border-b border-line pb-10 lg:flex-row lg:items-end lg:justify-between" data-reveal>
+      <div class="min-w-0">
+        <a
+          href="/"
+          class="inline-flex items-baseline gap-2 font-display font-semibold tracking-tight"
+          style="font-size: clamp(2.2rem, 6vw, 3.4rem); line-height: 1"
+        >
+          <span>MVGN</span><span class="text-crimson">Play</span>
+        </a>
+
+        <p class="mt-4 max-w-md text-sm text-ink-muted">
+          Configuración de TV Box y soporte técnico en la Zona Metropolitana de Guadalajara.
+        </p>
+
+        <!-- Metadatos como fila propia: sin espacios colapsados -->
+        <div class="mt-5 flex flex-wrap items-center gap-x-3 gap-y-2 text-xs text-ink-muted">
+          <span>Una iniciativa de</span>
+          <a
+            class="inline-flex items-center gap-1 rounded-none border border-line px-2.5 py-1 text-ink transition-colors hover:border-line-strong"
+            href={SITE.parentUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {SITE.parent}
+            <span aria-hidden="true">↗</span>
+          </a>
+          <span aria-hidden="true" class="h-3 w-px bg-line"></span>
+          <span>{SITE.region}</span>
+        </div>
+      </div>
+
+      <div class="flex flex-col gap-3 lg:items-end">
+        {
+          contactLink && (
+            <a
+              href={contactLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center justify-center gap-2 rounded-none bg-crimson px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-crimson-deep"
+            >
+              Escribir por WhatsApp
+              <span aria-hidden="true">↗</span>
+            </a>
+          )
+        }
+        {
+          contactLink && (
+            <a href={contactLink} target="_blank" rel="noopener noreferrer" class="font-mono text-sm text-ink-muted hover:text-ink">
+              {phone}
+            </a>
+          )
+        }
+      </div>
+    </div>
+
+    <!-- Columnas -->
+    <div class="grid gap-10 py-10 sm:grid-cols-2 lg:grid-cols-4" data-reveal style="--reveal-delay: 0.06s">
+      {
+        columns.map((column) => (
+          <nav aria-label={column.title}>
+            <p class="label-tech">{column.title}</p>
+            <ul class="mt-4 grid gap-2.5 text-sm">
+              {column.links.map((link) => (
+                <li>
+                  <a
+                    class="text-ink-muted underline-offset-4 transition-colors hover:text-ink hover:underline"
+                    href={link.href}
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        ))
+      }
+
+      <div>
+        <p class="label-tech">Contacto</p>
+        <ul class="mt-4 grid gap-2.5 text-sm">
+          <li>
+            <a
+              class="text-ink-muted underline-offset-4 hover:text-ink hover:underline"
+              href={contactLink ?? '/#consulta'}
+              target={contactLink ? '_blank' : undefined}
+              rel={contactLink ? 'noopener noreferrer' : undefined}
+            >
+              WhatsApp {phone}
+            </a>
+          </li>
+          <li class="text-ink-muted">{SITE.region}</li>
+          <li>
+            <a
+              class="text-ink-muted underline-offset-4 hover:text-ink hover:underline"
+              href={SITE.parentUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              MVGN Labs ↗
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <p class="label-tech">Tema</p>
+        <div class="mt-4 flex items-center gap-3">
+          <ThemeToggle variant="footer" />
+          <span class="text-sm text-ink-muted">Claro / oscuro</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Barra inferior -->
+    <div class="flex flex-col gap-3 border-t border-line pt-6 text-xs text-ink-muted sm:flex-row sm:items-start sm:justify-between">
+      <p class="max-w-3xl">
+        {SITE.name} no es distribuidor oficial de ONN ni mantiene afiliación con las marcas o servicios mencionados en
+        este sitio; las marcas pertenecen a sus titulares. El alcance de las aplicaciones incluidas puede cambiar con el
+        tiempo y su contenido no depende de {SITE.name}.
+      </p>
+      <p class="shrink-0 whitespace-nowrap">© {year} {SITE.name}</p>
+    </div>
+  </div>
+</footer>
