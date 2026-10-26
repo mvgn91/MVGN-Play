@@ -95,7 +95,7 @@ export default function ExperienceShowcase() {
           <div className="rounded-none border border-line bg-bg p-4">
             <div className="mb-3 flex items-center justify-between">
               <span className="label-tech">Inicio</span>
-              <span className="font-mono text-[0.625rem] text-cool">representación conceptual</span>
+              <span className="font-mono text-[0.625rem] text-cool">configuración personalizada</span>
             </div>
             <div className="grid grid-cols-3 gap-2 sm:grid-cols-6">
               {LAUNCHER_TILES.map((tile, index) => (

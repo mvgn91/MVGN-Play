@@ -117,6 +117,97 @@ const noIncluido = [
   </section>
 
   <section>
+    <h2>Compatibilidad del dispositivo</h2>
+    <p class="mt-4 text-ink-muted leading-relaxed">
+      MVGN Play configura TV Box con aplicaciones para películas, series y
+      televisión. La compatibilidad depende del sistema operativo y el
+      fabricante del equipo.
+    </p>
+
+    <table class="mt-6 w-full text-sm border-collapse">
+      <thead>
+        <tr class="border-b border-line/50">
+          <th class="text-left pb-2 text-ink font-display font-semibold text-[0.875rem] uppercase tracking-wider">Dispositivo</th>
+          <th class="text-left pb-2 text-ink font-display font-semibold text-[0.875rem] uppercase tracking-wider">Estado</th>
+          <th class="text-left pb-2 text-ink font-display font-semibold text-[0.875rem] uppercase tracking-wider">Observación</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-line/40">
+        <tr class="group">
+          <td class="py-3 text-ink">Android TV / Google TV</td>
+          <td class="py-3">
+            <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-none border border-crimson/30 bg-crimson/10 text-crimson text-[0.75rem] font-semibold uppercase tracking-wider">
+              Compatible
+            </span>
+          </td>
+          <td class="py-3 text-ink-muted">
+            Algunas aplicaciones externas pueden tener restricciones del
+            fabricante.
+          </td>
+        </tr>
+        <tr class="group">
+          <td class="py-3 text-ink">Fire TV</td>
+          <td class="py-3">
+            <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-none border border-cool/30 bg-cool/10 text-cool text-[0.75rem] font-semibold uppercase tracking-wider">
+              Parcial
+            </span>
+          </td>
+          <td class="py-3 text-ink-muted">
+            Personalización de inicio y aplicaciones externas limitadas.
+          </td>
+        </tr>
+        <tr class="group">
+          <td class="py-3 text-ink">
+            Tizen, webOS, VIDAA, Roku OS, tvOS
+          </td>
+          <td class="py-3">
+            <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-none border border-line/50 bg-surface text-ink-muted text-[0.75rem] font-semibold uppercase tracking-wider">
+              No compatible
+            </span>
+          </td>
+          <td class="py-3 text-ink-muted">
+            No admiten instalación directa de APK de Android mediante los
+            procedimientos convencionales.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="mt-8 pt-6 border-t border-line">
+      <h3 class="font-display text-lg font-semibold text-ink mb-3">Antes de contratar con equipo propio</h3>
+      <ul class="space-y-3 text-sm leading-relaxed text-ink">
+        <li class="flex items-start gap-3">
+          <span class="mt-0.5 text-crimson font-bold">✓</span>
+          <span>
+            Confirma el <strong>modelo exacto</strong> del dispositivo antes de
+            la contratación.
+          </span>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="mt-0.5 text-crimson font-bold">✓</span>
+          <span>
+            Verifica el <strong>sistema operativo</strong> y la
+            <strong>versión de firmware</strong> instalados.
+          </span>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="mt-0.5 text-crimson font-bold">✓</span>
+          <span>
+            Consulta las <strong>restricciones del fabricante</strong> para
+            instalar aplicaciones externas y personalizar la pantalla de inicio.
+          </span>
+        </li>
+      </ul>
+    </div>
+
+    <p class="mt-8 text-[0.875rem] text-ink-muted leading-relaxed">
+      MVGN Play no garantiza que todos los dispositivos permitan instalar las
+      mismas aplicaciones ni personalizar la interfaz de la misma manera. El
+      alcance final se confirma sobre el modelo exacto al contratar.
+    </p>
+  </section>
+
+  <section>
     <h2>No incluido automáticamente</h2>
     <ul>
       {noIncluido.map((item) => <li>{item}</li>)}

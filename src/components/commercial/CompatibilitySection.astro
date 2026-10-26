@@ -17,7 +17,7 @@ const depende = [
 ];
 ---
 
-<section id="condiciones" class="scroll-mt-28 border-t border-line/60">
+<section id="condiciones" class="scroll-mt-28 border-t border-line/60 backdrop-blur-xl">
   <div class="relative overflow-hidden">
     <div
       aria-hidden="true"
@@ -36,10 +36,10 @@ const depende = [
         </p>
       </div>
 
-      <div class="mt-10 grid gap-4 md:grid-cols-2">
+      <div class="mt-10 grid gap-4 md:grid-cols-12">
         <!-- Cubierto -->
         <article
-          class="rounded-panel border border-crimson/45 bg-crimson/[0.05] p-6"
+          class="md:col-span-6 rounded-panel border border-crimson/45 bg-crimson/[0.05] p-6"
           data-reveal
           style="--reveal-delay: 0.05s"
         >
@@ -64,7 +64,7 @@ const depende = [
 
         <!-- Depende de terceros -->
         <article
-          class="rounded-panel border border-line bg-surface/50 p-6"
+          class="md:col-span-6 rounded-panel border border-line bg-surface/50 p-6"
           data-reveal
           style="--reveal-delay: 0.12s"
         >
@@ -85,6 +85,77 @@ const depende = [
               ))
             }
           </ol>
+        </article>
+
+        <!-- Tarjeta de compatibilidad del dispositivo (ancho total) -->
+        <article
+          class="md:col-span-12 rounded-panel border border-line bg-surface/50 p-6 sm:p-8"
+          data-reveal
+          style="--reveal-delay: 0.25s"
+        >
+          <div class="flex items-center justify-between border-b border-line pb-3 mb-4">
+            <p class="label-tech">Compatibilidad del dispositivo</p>
+          </div>
+
+          <p class="text-sm text-ink-muted mb-4 leading-relaxed">
+            MVGN Play configura TV Box con aplicaciones para películas, series y
+            televisión. La compatibilidad depende del sistema operativo y el
+            fabricante del equipo.
+          </p>
+
+          <div class="grid gap-6 lg:grid-cols-3 mb-6">
+            <div class="border border-line/50 bg-surface/30 p-5 rounded-none">
+              <h4 class="text-ink font-display font-semibold mb-2">Android TV / Google TV</h4>
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-none border border-crimson/30 bg-crimson/10 text-crimson text-[0.7rem] font-semibold uppercase tracking-wider mb-3 block">
+                Compatible
+              </span>
+              <p class="text-sm text-ink-muted leading-relaxed">
+                Algunas aplicaciones externas pueden tener restricciones del fabricante.
+              </p>
+            </div>
+            <div class="border border-line/50 bg-surface/30 p-5 rounded-none">
+              <h4 class="text-ink font-display font-semibold mb-2">Fire TV</h4>
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-none border border-cool/30 bg-cool/10 text-cool text-[0.7rem] font-semibold uppercase tracking-wider mb-3 block">
+                Parcial
+              </span>
+              <p class="text-sm text-ink-muted leading-relaxed">
+                Personalización de inicio y aplicaciones externas limitadas.
+              </p>
+            </div>
+            <div class="border border-line/50 bg-surface/30 p-5 rounded-none">
+              <h4 class="text-ink font-display font-semibold mb-2">Otros sistemas</h4>
+              <p class="text-sm text-ink-muted leading-relaxed mb-3">
+                Tizen, webOS, VIDAA, Roku OS, tvOS
+              </p>
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-none border border-line/50 bg-surface text-ink-muted text-[0.7rem] font-semibold uppercase tracking-wider block">
+                No compatible
+              </span>
+            </div>
+          </div>
+
+          <div class="pt-6 border-t border-line">
+            <p class="label-tech text-[0.75rem] mb-3">Antes de contratar con equipo propio</p>
+            <ul class="space-y-2 text-sm text-ink">
+              <li class="flex items-start gap-2">
+                <span class="mt-0.5 text-crimson font-bold">✓</span>
+                <span>Confirmar el modelo exacto del dispositivo.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="mt-0.5 text-crimson font-bold">✓</span>
+                <span>Verificar sistema operativo y versión de firmware.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="mt-0.5 text-crimson font-bold">✓</span>
+                <span>Consultar restricciones del fabricante para aplicaciones externas.</span>
+              </li>
+            </ul>
+          </div>
+
+          <p class="mt-5 text-[0.75rem] text-ink-muted leading-relaxed">
+            MVGN Play no garantiza que todos los dispositivos permitan instalar
+            las mismas aplicaciones ni personalizar la interfaz de la misma
+            manera.
+          </p>
         </article>
       </div>
 

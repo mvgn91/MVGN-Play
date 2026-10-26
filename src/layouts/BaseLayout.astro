@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import { SITE } from '@/config/site';
+import Dither from '@/components/backgrounds/Dither';
 
 interface Props {
   title: string;
@@ -9,9 +10,13 @@ interface Props {
 
 const { title, description } = Astro.props;
 
-// Con build.format=file las rutas llegan como /soporte.html o /index.html:
-// se normalizan para que el canonical coincida con la URL publicada.
-const pathname = Astro.url.pathname.replace(/\/index\.html$/, '/').replace(/\.html$/, '/');
+// Con build.format=file las rutas se publican sin .html ni barra final
+// (Cloudflare Pages redirige /soporte/ -> /soporte): el canonical debe
+// coincidir con la URL que realmente se sirve.
+const pathname = Astro.url.pathname
+  .replace(/\/index\.html$/, '/')
+  .replace(/\.html$/, '')
+  .replace(/\/$/, '') || '/';
 const canonical = Astro.site ? new URL(pathname, Astro.site).href : undefined;
 const socialImage = Astro.site ? new URL('/og.png', Astro.site).href : undefined;
 ---
@@ -74,6 +79,24 @@ const socialImage = Astro.site ? new URL('/og.png', Astro.site).href : undefined
     >
       Saltar al contenido
     </a>
+
+    <!-- Dither (reactbits) de fondo: cubre el viewport detrás de todo el contenido.
+         -z-10 lo deja sobre el fondo del body pero bajo cualquier elemento;
+         pointer-events-none no bloquea clics (el puntero se lee desde window).
+         backgroundColor=transparent hereda el tema claro/oscuro del body. -->
+    <div class="pointer-events-none fixed inset-0 -z-10 overflow-hidden opacity-60" aria-hidden="true">
+      <Dither
+        client:visible
+        backgroundColor="transparent"
+        waveColor="#dc143c"
+        ditherMode="bayer"
+        waveAmplitude={0.15}
+        enableMouseInteraction
+        mouseEffect="erase"
+        clickRipple
+      />
+    </div>
+
     <slot />
 
     <!-- Parallax + revelado al hacer scroll (se desactiva con movimiento reducido) -->

@@ -122,10 +122,12 @@
 /* ── Utilidades ─────────────────────────────────────────────── */
 @utility label-tech {
   font-family: var(--font-mono);
-  font-size: 0.6875rem;
+  font-size: 1rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--ink-muted);
+  color: var(--crimson);
+  text-shadow: 0 0 10px color-mix(in oklab, var(--crimson) 55%, transparent),
+    0 0 24px color-mix(in oklab, var(--crimson) 28%, transparent);
 }
 
 /* Resplandor crimson controlado, sin acumular efectos */
@@ -143,6 +145,12 @@
     linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
     linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
   background-size: 4rem 4rem;
+}
+
+/* Glow rojo/neon para títulos de sección */
+@utility text-glow-cr {
+  text-shadow: 0 0 10px color-mix(in oklab, var(--crimson) 60%, transparent),
+    0 0 26px color-mix(in oklab, var(--crimson) 30%, transparent);
 }
 
 /* ── Movimiento al scroll ───────────────────────────────────────
